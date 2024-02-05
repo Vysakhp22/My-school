@@ -1,0 +1,86 @@
+<div class="container pt-4 ">
+  <form [formGroup]="studentForm" (ngSubmit)="onStudentFormSubmit()">
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Add Student
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="form-field-group">
+          <div class="row gy-3">
+            <div class="form-group col-md-12">
+              <label for="fname">Register No.</label>
+              <input type="text" class="form-control" id="regno" placeholder="Register No."
+                formControlName="registerNo">
+              @if (allControls['registerNo'].invalid && allControls['registerNo'].touched) {
+              <small class="text-danger">Register number is required</small>
+              }
+            </div>
+            <div class="form-group col-md-6">
+              <label for="fname">First Name</label>
+              <input type="text" class="form-control" id="fname" placeholder="First Name" formControlName="firstName">
+              @if (allControls['firstName'].invalid && allControls['firstName'].touched) {
+              <small class="text-danger">First Name is required</small>
+              }
+            </div>
+            <div class="form-group col-md-6">
+              <label for="lname">Last Name</label>
+              <input type="text" class="form-control" id="lname" placeholder="Last Name" formControlName="lastName">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Email</label>
+              <input type="email" class="form-control" id="inputEmail4" placeholder="Email" formControlName="email">
+              @if (allControls['email'].errors?.['required'] && allControls['email'].touched) {
+              <small class="text-danger">Email is required</small>
+              } @else if (studentForm.get('email')?.hasError('email')) {
+              <small class="text-danger"> Invalid Email</small>
+              }
+            </div>
+            <div class="form-group col-md-6">
+              <label for="dob">Date of birth</label>
+              <input type="date" class="form-control" id="dob" formControlName="dob">
+              @if(studentForm.get('dob')?.hasError('required')){
+              <small class="text-danger">Dob is required</small>
+              }
+            </div>
+            <div class="form-group col-md-6">
+              <label for="fathername">Father Name</label>
+              <input type="text" class="form-control" id="fathername" placeholder="Father Name"
+                formControlName="fatherName">
+              @if (studentForm.get('fatherName')?.hasError('required')){
+              <small class="text-danger">Father Name is required</small>
+              }
+            </div>
+            <div class="form-group col-md-6">
+              <label for="mothername">Mother Name</label>
+              <input type="text" class="form-control" id="mothername" placeholder="Mother Name"
+                formControlName="motherName">
+              @if (studentForm.get('motherName')?.hasError('required')){
+              <small class="text-danger">Mother Name is required</small>
+              }
+            </div>
+            <div class="form-group col-md-6">
+              <label for="address">Address</label>
+              <textarea class="form-control" id="address" rows="1" formControlName="address"></textarea>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="mobile">Mobile No.</label>
+              <input type="number" class="form-control" id="mobile" placeholder="Mobile No." formControlName="mobile">
+              @if (studentForm.get('mobile')?.hasError('required')){
+              <small class="text-danger">Mobile is required</small>
+              } @else if (studentForm.get('mobile')?.hasError('minLength') ||
+              studentForm.get('mobile')?.hasError('maxLength')) {
+              <small class="text-danger">Mobile number must be 10 digit</small>
+              }
+            </div>
+          </div>
+          <div class="col-md-12 d-flex form-group justify-content-center pt-4">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </form>
+</div>
